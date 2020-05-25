@@ -79,7 +79,7 @@ namespace CarbonIntensity
 
                     foreach (var intensityDate in results.data)
                     {
-                        bool now = intensityDate.from <= DateTime.Now && intensityDate.to >= DateTime.Now;
+                        bool now = intensityDate.from <= DateTime.UtcNow && intensityDate.to >= DateTime.UtcNow;
 
                         value = (intensityDate.intensity.actual == null) ? intensityDate.intensity.forecast : (int)intensityDate.intensity.actual;
 
@@ -116,8 +116,8 @@ namespace CarbonIntensity
 
                         shadePrevious = shade;
 
-                        //g.FillRectangle(new SolidBrush(shade), x, 0, columnWidth, image.Height);
-                        g.FillRectangle(brush, x, 0, columnWidth, image.Height);
+                        g.FillRectangle(new SolidBrush(shade), x, 0, columnWidth, image.Height);
+                        //g.FillRectangle(brush, x, 0, columnWidth, image.Height);
 
                         if (now)
                         {
