@@ -75,11 +75,13 @@ namespace CarbonIntensity
 
                     Color shadePrevious = Color.White;
 
+                    int value = 0;
+
                     foreach (var intensityDate in results.data)
                     {
                         bool now = intensityDate.from <= DateTime.Now && intensityDate.to >= DateTime.Now;
 
-                        int value = (intensityDate.intensity.actual == null) ? intensityDate.intensity.forecast : (int)intensityDate.intensity.actual;
+                        value = (intensityDate.intensity.actual == null) ? intensityDate.intensity.forecast : (int)intensityDate.intensity.actual;
 
                         Color shade = Color.White;
 
@@ -135,7 +137,7 @@ namespace CarbonIntensity
                         co2now.ToString(),
                         new Font("Calibri", 64),
                         new SolidBrush(color),
-                        1780, 920
+                        (value >= 100) ? 1755 : 1780, 920 // alignment based on 2 or 3 digits
                         );
                     g.DrawString(
                         String.Format("gC0₂/kWh", co2now),
